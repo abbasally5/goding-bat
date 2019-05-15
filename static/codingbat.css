@@ -1,0 +1,268 @@
+html, body  { font-size: small; font-family: verdana, arial, helvetica, sans-serif;}
+
+/* MOBILE-CSS prevents crazy shrinking of font in table e.g. on section page */
+html,body { -webkit-text-size-adjust:none; text-size-adjust:none; } 
+
+/* someday maybe a bigger font */
+
+/* font-size: 85% works ok too. Historically cb was verdana/small */
+/* font-size: medium .. have tried */
+/* TBD: wikipedia sets a custom line-height which seems to work nicely with small font */
+
+/* cb: font-size: small; */
+/* Small seems a bit over-small. Using a % seems to give a fraction of "medium". I think "small" is about 75% */
+/* hacker: body  { font-family:Verdana, Geneva, sans-serif; font-size:10pt; color:#828282; }*/
+
+/* at one time, pre was coming out too small when body=small, but medium is huge, so now do nothing */
+/* The show-solution button really hits this case. */
+/* pre, code {font-size:medium; } */
+/* It turns out the "monaco" font family looks pretty big at small, so we just leave it now */
+/* could have  "medium" directive for the "doc" pages where it looks nicer */
+
+/* this is the list from ace which seems fine */
+pre, code {font-family: "Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace}
+
+
+/* Older p max-width directive, phase out */
+p { max-width:800px; }
+
+/* main max width */
+p.max { max-width:800px; }
+
+/* doc paragraph above code area, should agree with code area width roughly */
+p.max2 { max-width:600px; }
+
+a { text-decoration:none; }
+
+/* ..EE is web default, we go a bit darker */
+:link { color: #0000DD; }
+
+/* web default #551A8B */
+:visited { color: #551A8B; }
+
+
+/* These are used on Challenge page */
+.coding { border: 2px solid gray; font-family: monospace; font-size:medium }
+.lefty {  float: left; padding-right: 40px; } /* left div with ta-code */
+.righty { float: left;  } /* right output div */
+.parenty:after {  /* Imaginary class name */
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* These are more normal names, tied to div */
+div.floatleft { float: left; }
+div.floatclear { clear: both; }  /* div class to reset the floats to normal */
+
+
+/* The little box that summarizes a section. Margin is box vs. outside, padding is within the box */
+div.summ { max-width:300px; margin:15px;  padding:10px; border:1px solid gray; border-radius:1em; }
+
+
+/* used to indent the Challenge content similarly to div.summ */
+div.indent { margin-left:15px; margin-top:15px;  }/* padding:5px; */
+
+
+/* generally what we want */
+td { vertical-align: top; }
+
+/* These used to define w 'h1,' h2 h3, but still have the .h1 .h2 versions. class=h2 is our go-to big font for section titles etc. */
+.h1 { font-size:300%; } 
+.h2 { font-size:166%; }
+.h3 { font-size:120%; }
+
+
+/* used in output for red coloring of fail results */
+span.no { color:red }
+td.no { min-width:22px; background-color:red; }
+td.ok { min-width:22px; background-color:green; }
+
+/* code snippet with explanation to its right on API pages*/
+code.spaceright { margin-right:12px; }
+
+/* text snippet to indent a little */
+p.indent { margin-left:25px; }
+
+/* main go button. Used to lightgray, a windows 95 look! */
+button.go {width:200px; height:30px; background-color:#f1f1f1; font-size:112%; font-weight:bold;
+            border-radius: 6px;
+           }
+           
+           
+/* make the color here the same so fits in */
+button.gray { background-color:#f1f1f1; border-radius: 6px; }
+
+button.go {
+	font-weight: bold;
+	border-radius: 8px; /* all current browsers */
+	background: #bbb;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #777;
+	color: #333;
+	text-align: center;
+	text-shadow: 1px 1px 0 #d8d8d8;
+	background-image: linear-gradient(to bottom,rgba(255,255,255,0.8),rgba(255,255,255,0.2));
+	
+	
+	width:200px;
+	height:35px;
+	font-size:125%;
+}
+
+button.go:hover {
+		background-color: #aaa;
+		color: #111;
+		border-color: #444;
+		
+		transition-duration: 0.1s;  /* looks a little better */
+	}
+
+button.go:active {
+    background: #484848; 
+ }
+
+
+/* played around with the plain buttons for some sort of hover, but left it stock */
+button.plain {
+  /*
+   border-radius: 6px;
+   font-weight: bold;
+   */
+ }
+ 
+ button.plain:hover {
+   /*
+   background-color: #f2f2f2;
+   border-radius: 6px;
+   */
+ }
+ 
+ /* border: solid 1px #203E5F; */
+ 
+/*
+	background-image: -moz-linear-gradient(top,rgba(255,255,255,0.8),rgba(255,255,255,0.2));
+	background-image: -webkit-gradient(linear,center top,center bottom,from(rgba(255,255,255,0.8)),to(rgba(255,255,255,0.2)));
+	background-image: linear-gradient(to bottom,rgba(255,255,255,0.8),rgba(255,255,255,0.2));
+*/
+
+/*
+// for author page, this may be necessary to make the disabled have the same light gray across browsers
+// works when the disabled attr is present (with any value)
+textarea[disabled]{background-color: #F8F8F8; }
+*/
+
+/*
+From challenge page
+textarea name=code rows=24 cols=80 style='border: 2px solid gray; font-family: monospace;' spellcheck=false onKeyPress='return handleCR(\"codeform\",event)'>
+*/
+
+
+/* challenge docs in here, so UI does not jump around too much for short docs. */
+div.minh { min-height:32px; }
+
+/* div of text above the tabs. Min-height here so the key muscle-memory bits don't jump around too much.
+26px here works with a line of text */
+
+div.pretab {
+  min-height:9px;
+}
+
+/* container around tab, forcing it below login widget. clear:both is required */
+div.tabc {
+  min-width:100vw;
+  clear:both;
+}
+
+/* nav/tab stuff here */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* TRBL ! */
+nav li {
+    display: inline;
+    border: solid;
+    border-width: 1px 1px 0 1px;
+    margin: 0 25px 0 6px;  /* space between the two tabs */
+}
+
+nav li a {
+    padding: 0 40px; /* horiz space around the blue link */
+}
+
+/*
+#nav li {
+    float: left;
+    border: 1px solid;
+    border-bottom-width: 0;
+    margin: 0 5px 0 0;
+}
+*/
+
+div.tabin {
+    border-top: 1px solid;
+    clear: both;
+}
+
+#content {
+    border-top: 1px solid;
+    clear: both;
+}
+
+#selected {
+    position: relative;
+    top: 1px;
+    background: white;
+}
+/* end nav/li */
+
+
+
+
+
+/* ace support */
+/* their demo, which is awful
+#editor { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+*/
+
+/* discarded: margin: auto; display: block; border: 1px solid #888; */
+#ace_div { 
+  width: 600px;
+  height: 375px;
+  border: 2px solid gray; 
+}
+
+
+
+/* output table */
+
+table.out {
+  border-collapse: collapse; /* vs. sep border per cell */
+}
+
+table.out td { /* , th */
+  border: 2px solid black;
+  padding: 4px;
+}  
+
+
+/* as above, but over on the pref page */
+table.clean {
+  border-collapse: collapse; /* vs. sep border per cell */
+}
+
+td.clean {
+  border: 1px solid black;
+  padding: 6px;
+} 
+
