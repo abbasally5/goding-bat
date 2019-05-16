@@ -1,0 +1,109 @@
+<!doctype html>
+<head>
+    <meta charset=utf-8 />
+
+    <link rel=stylesheet type=text/css href=/static/codingbat.css>
+
+    <script src='/static/ace.js' type='text/javascript' charset='utf-8'></script>
+    <script src='/static/challenge.js' type='text/javascript' charset='utf-8'></script>
+    <title>CodingBat Java Warmup-1 sleepIn</title>
+</head>
+<body>
+    <a href=/><span style='font-size:200%;'>CodingBat</span></a> code practice
+    <div class=pretab>
+        <p class=max>&nbsp;
+    </div>
+    <div class=tabc>
+        <div class=tabin>
+            <div class=indent>
+                <a href='/java/Warmup-1'><span class=h2>Warmup-1</span></a>
+                &gt; <span class=h2>sleepIn</span></a>
+                <br>prev &nbsp;|&nbsp; <a href='/prob/p181646'>next</a> &nbsp;|&nbsp; <a rel=nofollow href='/java/Warmup-1?chance=1'>chance</a>
+                <p>
+                    <table border=0>
+                        <tr>
+                            <td valign=top>
+                            <div class=minh>
+                                <p class=max2>The parameter weekday is true if it is a weekday, and the parameter vacation is true if we are on vacation. We sleep in if it is not a weekday or we're on vacation. Return true if we sleep in.
+                            </div>
+                            <br>sleepIn(false, false) &rarr; true<br>sleepIn(true, false) &rarr; false<br>sleepIn(false, true) &rarr; true
+                            <p>
+                                <button class=go onclick='sendCodeAce(); focusEdit(); return false;'>Go</button>
+                                ...Save, Compile, Run (ctrl-enter)
+                                <span style='margin-left:60px;' />
+                                    <button class=gray onclick='document.getElementById("results").innerHTML="<b>Solution:</b><pre>"+unescape("public boolean sleepIn(boolean weekday, boolean vacation) {%0a  if (!weekday || vacation) {%0a    return true;%0a  }%0a  %0a  return false;%0a  %0a  // Solution notes: better to write %26quot;vacation%26quot; than %26quot;vacation == true%26quot;%0a  // though they mean exactly the same thing.%0a  // Likewise %26quot;!weekday%26quot; is better than %26quot;weekday == false%26quot;.%0a  // This all can be shortened to: return (!weekday || vacation);%0a  // Here we just put the return-false last, or could use an if/else.%0a}" + "</pre>"); sendRemark("h2");' >Show Solution
+                                    </button>
+                            <form name=codeform><div id='ace_div'>public boolean sleepIn(boolean weekday, boolean vacation) {
+                              
+                            }
+            </div>
+
+            <script>
+                var editor = ace.edit('ace_div');
+                editor.renderer.setShowGutter(false);
+                editor.setTheme('ace/theme/chrome');
+                editor.getSession().setMode('ace/mode/java');
+                editor.getSession().setTabSize(2);
+                editor.getSession().setUseSoftTabs(true);
+                document.ace_editor = editor;
+                editor.$blockScrolling = Infinity;
+                setupKey(editor);
+                startCursor(editor, 'java');
+            </script>
+        </div>
+    </div>
+</div>
+    <p><button class=go onclick='sendCodeAce(); focusEdit(); return false;'>Go</button>
+    <p>Editor font size %:
+        <select name=font onchange='fontChange(event);'>
+            <option>75</option>
+            <option selected>100</option>
+            <option>125</option>
+            <option>150</option>
+        </select>
+    <br>Shorter output 
+    <input type=checkbox  name=outputonly>
+    <input type=hidden name=id value="p187868">
+    <input type=hidden name=owner value=''>
+    <input type=hidden name=cuname value=''>
+    <input type=hidden name=adate value='20190515-172129z'>
+    </form>
+    </td>
+    <td width=500 valign=top>
+        <div id=results style='margin-top:10em;margin-left:1em;'></div>
+    </td>
+    </tr>
+    </table>
+    <br><a rel=nofollow href='/prob/p187868?clear=1'>Forget It!</a> -- delete my code for this problem
+    <p>Progress graphs: <br>&nbsp;<a href='/done/p187868'>Your progress graph</a> for this problem<br>&nbsp;
+    <a rel=nofollow href='/done/p187868?random'>Random user progress graph</a> for this problem <br>&nbsp;<a rel=nofollow href=/done/epic>Random Epic Progress Graph</a>
+    <h3>Java Help</h3>
+    <p style='max-width:800px'>
+    <ul>
+        <li><a href=/doc/java-example-solution-code.html>Java Example Solution Code</a>
+        <li><a href=/doc/java-string-introduction.html>Java String Introduction</a> (video) 
+        <li><a href=/doc/java-string-substring.html>Java Substring v2</a> (video)
+        <li><a href=/doc/java-string-equals-loops.html>Java String Equals and Loops</a>
+        <li><a href=/doc/java-string-indexof-parsing.html>Java String indexOf and Parsing</a>
+        <li><a href=/doc/java-if-boolean-logic.html>Java If and Boolean Logic</a>
+        <li>&nbsp; <a href=/doc/java-if-boolean-example-solution-code-1.html>If Boolean Logic Example Solution Code 1</a> (video)
+        <li>&nbsp; <a href=/doc/java-if-boolean-example-solution-code-2.html>If Boolean Logic Example Solution Code 2</a> (video)
+        <li><a href=/doc/java-for-while-loops.html>Java For and While Loops</a>
+        <li><a href=/doc/java-array-loops.html>Java Arrays and Loops</a>
+        <li><a href=/doc/java-map-introduction.html>Java Map Introduction</a>
+        <li><a href=/doc/java-map-wordcount.html>Java Map WordCount</a>
+        <li><a href=/doc/java-functional-mapping.html>Java Functional Mapping</a>
+        <li><a href=/doc/java-functional-filtering.html>Java Functional Filtering</a>
+    </ul>
+    <p style='max-width:800px'>
+    <h3>Misc Code Practice</h3>
+    <ul>
+        <li><a href=/doc/practice/code-badges.html>Code Badges</a>
+        <li><a href=/doc/practice/mod-introduction.html>Introduction to Mod</a> (video)
+        <li><a href=/doc/practice/makebricks-introduction.html>MakeBricks problem and solution</a> (video x 2)
+        <li><a href=/doc/practice/fizzbuzz-code.html>FizzBuzz the famous</a> code interview question (video)
+    </ul>
+    <p><font color=gray>Difficulty: 103.0</font>
+    <p><p style='font-size:x-small;'>Copyright <a style='font-size:x-small;' href='http://www-cs-faculty.stanford.edu/~nick'>Nick Parlante</a> 2017 - <a style='font-size:x-small;' href=/privacy.html>privacy</a>
+</body>
+</html>
