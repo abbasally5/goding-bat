@@ -60,10 +60,12 @@ def get_problem_sets():
 
     divs = soup.find_all("div", class_="summ")
     for d in divs:
+        desc = list(d.strings)[-1].strip()
         problem_set = d.find('a')
         problem_sets.append({
             "problem_set_name": problem_set.string, 
-            "problem_set_url": problem_set.get('href')})
+            "problem_set_url": problem_set.get('href'),
+            "problem_set_description": desc})
 
     return problem_sets
 
