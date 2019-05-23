@@ -1,0 +1,20 @@
+{{ template "base" .}}
+{{ define "content" }}
+<div class="indent">
+    <span class="h2">{{ .Name }}</span>
+    <p>{{ .Description }}</p>
+    <table>
+        {{ range .Results}}
+        <tr>
+            {{ range . }}
+            <td width="200">
+                <a href="{{ .Id }}">{{ .Name }}</a> 
+            </td>
+            {{ end }}
+        </tr>
+        {{ end }}
+    </table>
+    <ul>
+    </ul>
+</div>
+{{ end }}

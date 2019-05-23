@@ -107,7 +107,7 @@ def get_problem_info(prob_url, prob_name, prob_set):
     description = "\n".join(desc_list)
 
     # Get next and prev problems
-    next_prob, prev_prob = None, None
+    next_prob, prev_prob = "", ""
 
     next_ = soup.find("a", string="next")
     if next_ is not None:
@@ -181,7 +181,7 @@ def run():
 
     for problem_set in problem_sets:
         # Save problem set to DB
-        ps.update_one({"name": problem_set["problem_set_name"]}, 
+        ps.update_one({"problem_set_name": problem_set["problem_set_name"]}, 
                       {"$set": problem_set}, upsert=True)
         print(problem_set["problem_set_name"])
 
@@ -189,7 +189,9 @@ def run():
         problems = get_problems(problem_set["problem_set_url"])
         # Save problem map to DB
         pm.update_one({"name": problem_set["problem_set_name"]}, {"$set": 
-            {"name": problem_set["problem_set_name"], "problems": problems}}, upsert=True)
+            {"name": problem_set["problem_set_name"], 
+             "description": problem_set["problem_set_description"], 
+             "problems": problems}}, upsert=True)
 
         for p in problems:
             print("\t", p["problem_name"], p["problem_id"])

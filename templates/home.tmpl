@@ -1,0 +1,23 @@
+{{ template "base" .}}
+{{ define "content" }}
+<table>
+    <tbody>
+        {{ range . }}
+        <tr>
+        {{ range . }}
+        <td>
+            <div class="summ">
+                <a href="{{ .Name }}">
+                    <span class="h2">{{ .Name }}</span>
+                </a>
+                <br>
+                {{ .Description }} 
+                <br>
+            </div>
+        </td>
+        {{ end }}
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+{{ end }}

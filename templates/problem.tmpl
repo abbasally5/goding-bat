@@ -1,0 +1,36 @@
+{{ template "base" .}}
+{{ define "content" }}
+<div class="indent">
+    <a href="/{{ .Set }}"><span class="h2">{{ .Set }}</span></a>
+    >
+    <span class="h2">{{.Name }}</span>
+    <br>
+    {{ if .PrevProblem }}
+        <a href={{ .PrevProblem }}>prev</a>
+    {{ else }}
+        prev
+    {{ end }}
+    |
+    {{ if .NextProblem }}
+        <a href={{ .NextProblem }}>next</a>
+    {{ else }}
+        next
+    {{ end }}
+    <p></p>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="minh">
+                        <p class="max2">{{ .Description }}</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a rel="nofollow" href="{{ .Id }}?clear=1">Forget It!</a>
+</div>
+<!--<script src='/static/ace.js' type='text/javascript' charset='utf-8'></script>
+<script src='/static/challenge.js' type='text/javascript' charset='utf-8'></script>
+<title>CodingBat Java Warmup-1 sleepIn</title>-->
+{{ end }}
