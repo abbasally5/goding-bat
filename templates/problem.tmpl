@@ -1,10 +1,15 @@
 {{ template "base" .}}
+{{ define "extend_header" }}
+    <script src='/static/challenge.js' type='text/javascript' charset='utf-8'></script>
+    <script src='/static/ace.js' type='text/javascript' charset='utf-8'></script>
+    <script src="/static/theme-chrome.js"></script>
+    <script src="/static/mode-java.js"></script>
+{{end }}
 {{ define "content" }}
 <div class="indent">
     <a href="/{{ .Set }}"><span class="h2">{{ .Set }}</span></a>
     >
-    <span class="h2">{{.Name }}</span>
-    <br>
+    <span class="h2">{{.Name }}</span><br>
     {{ if .PrevProblem }}
         <a href={{ .PrevProblem }}>prev</a>
     {{ else }}
@@ -21,9 +26,48 @@
         <tbody>
             <tr>
                 <td>
-                    <div class="minh">
-                        <p class="max2">{{ .Description }}</p>
-                    </div>
+                    {{ range $idx, $elem := .DescriptionSplit }}
+                        {{ if eq $idx 0 }}
+                            <div class="minh">
+                                <p class="max2">{{ $elem }}</p>
+                            </div>
+                        {{ else }}
+                            <br>{{ $elem }}
+                        {{ end }}
+                    {{ end }}
+                    <p>
+                         <button class="go" onclick="sendCodeAce(); focusEdit(); return false;">Go</button>
+                         ...Save, Compile, Run (ctrl-enter)
+                    </p>
+                    <form name="codeform">
+                        <div id="ace_div" class="ace_editor ace-chrome">{{ .StartCode }}</div>
+                        <script>
+                            var editor = ace.edit('ace_div');
+                            editor.renderer.setShowGutter(false);
+                            editor.setTheme('ace/theme/chrome');
+                            editor.getSession().setMode('ace/mode/java');
+                            editor.getSession().setTabSize(2);
+                            editor.getSession().setUseSoftTabs(true);
+                            document.ace_editor = editor;
+                            editor.$blockScrolling = Infinity;
+                            setupKey(editor);
+                            startCursor(editor, 'java');
+                        </script>
+                    </form>
+                    <p>
+                         <button class="go" onclick="sendCodeAce(); focusEdit(); return false;">Go</button>
+                    </p>
+                    <p>Editor font size %:
+                        <select name="font" onchange="fontChange(event);">
+                            <option>75</option>
+                            <option selected="">100</option>
+                            <option>125</option>
+                            <option>150</option>
+                        </select><br>                    
+                    </p>
+                </td>
+                <td>
+                    <div id="results"></div>
                 </td>
             </tr>
         </tbody>

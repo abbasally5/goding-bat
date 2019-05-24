@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/gorilla/mux"
 
@@ -31,13 +32,28 @@ type ProblemSetOverview struct {
 	Description string `bson:"problem_set_description"`
 }
 
+type ProblemSetProblems struct {
+	Name string `bson:"problem_name"`
+	Id   string `bson:"problem_id"`
+}
+
 type ProblemSet struct {
-	Name        string `bson:"name"`
-	Description string `bson:"description"`
-	Problems    []*struct {
-		Name string `bson:"problem_name"`
-		Id   string `bson:"problem_id"`
-	} `bson:"problems"`
+	Name        string                `bson:"name"`
+	Description string                `bson:"description"`
+	Problems    []*ProblemSetProblems `bson:"problems"`
+}
+
+func (p ProblemSet) TemplateProblems() [][]*ProblemSetProblems {
+	var results [][]*ProblemSetProblems
+
+	for row := 0; row <= len(p.Problems)/ProbColumns; row++ {
+		var rowResult []*ProblemSetProblems
+		for col := 0; col < ProbColumns && (row*ProbColumns+col) < len(p.Problems); col++ {
+			rowResult = append(rowResult, p.Problems[row*HomeColumns+col])
+		}
+		results = append(results, rowResult)
+	}
+	return results
 }
 
 type Problem struct {
@@ -51,12 +67,16 @@ type Problem struct {
 	ProbTests   []*string `bson:"problem_tests"`
 }
 
+func (p Problem) DescriptionSplit() []string {
+	return strings.Split(p.Description, "\n")
+}
+
+type DataType interface{}
+
 type ProblemTest struct {
 	Inputs []*DataType
 	Output DataType
 }
-
-type DataType interface{}
 
 // Handlers
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -129,22 +149,6 @@ func setHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var results [][]*struct {
-		Name string `bson:"problem_name"`
-		Id   string `bson:"problem_id"`
-	}
-
-	for row := 0; row <= len(problemSet.Problems)/ProbColumns; row++ {
-		var rowResult []*struct {
-			Name string `bson:"problem_name"`
-			Id   string `bson:"problem_id"`
-		}
-		for col := 0; col < ProbColumns && (row*ProbColumns+col) < len(problemSet.Problems); col++ {
-			rowResult = append(rowResult, problemSet.Problems[row*HomeColumns+col])
-		}
-		results = append(results, rowResult)
-	}
-
 	setTemplates := append(baseTemplates, "templates/problem_set.tmpl")
 	t, err := template.ParseFiles(setTemplates...)
 	if err != nil {
@@ -152,17 +156,7 @@ func setHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = t.ExecuteTemplate(w, "problem_set.tmpl", struct {
-		Name        string
-		Description string
-		Results     [][]*struct {
-			Name string `bson:"problem_name"`
-			Id   string `bson:"problem_id"`
-		}
-	}{
-		problemSet.Name,
-		problemSet.Description,
-		results})
+	err = t.ExecuteTemplate(w, "problem_set.tmpl", problemSet)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
@@ -193,7 +187,6 @@ func probHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Massage data
-
 	//fmt.Println(problem)
 
 	probTemplates := append(baseTemplates, "templates/problem.tmpl")
