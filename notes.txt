@@ -1,0 +1,8 @@
+# Commands to create certificate
+openssl genrsa -out key.pem
+openssl req -new -key key.pem -out cert.pem
+openssl req -x509 -days 365 -key key.pem -in cert.pem -out certificate.pem
+
+# Setup environment for running code in native client
+# Followed instructions in https://golang.org/misc/nacl/README
+# Fixed certificate issue following https://groups.google.com/forum/#!topic/native-client-discuss/ViBofmhWpyM
